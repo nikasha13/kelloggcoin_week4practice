@@ -27,3 +27,24 @@ blockchain = [
 # Anthony's KelloggCoin balance is 2650
 
 # 👇👇👇 Your code HERE 👇👇👇
+
+#creates new hash that returns 0 if key doesn't yet exist
+wallets = Hash.new(0)
+#starts loop starting from zero up to (but not including) length of blockchain hash
+#assigns variables - pulls out from, to, and amount
+for transaction in 0...blockchain.length
+  trans = blockchain[transaction]
+  from_user = trans["from_user"]
+  to_user = trans["to_user"]
+  amount = trans["amount"]
+#pulls "from user" key from wallets hash and subtracts the amount if the "from user" is not nil - for the first runthrough, pulls the "from" name if the key doesn't exist and starts it at 0, subtracting and adding amounts
+#pulls "to user" key from wallets hash and adds the amount
+#loops all values of the from_user and to_user variables while adding/subtracting the amount
+wallets[from_user] -= amount if from_user != nil
+wallets[to_user] += amount
+end
+#loop that iterates over each key value pair (user and balance, which is what's left)
+for user, balance in wallets
+  puts "#{user}'s KelloggCoin balance is #{amount}"
+end
+puts wallets
